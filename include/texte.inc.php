@@ -12,6 +12,9 @@
         case 'connexion':
             include_once('pages/connexion.inc.php');
             break;
+        case 'validationConnexion':
+            include_once('pages/validationConnexion.inc.php');
+            break;
         case 'deconnexion':
             include_once('pages/deconnexion.inc.php');
             break;
