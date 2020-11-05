@@ -37,17 +37,7 @@
 <?php
     }
     else {
-        $ville1 = new Ville(
-            array(
-                'vil_num' => $_POST["ville1"]
-            )
-        );
-        $ville2 = new Ville(
-            array(
-                'vil_num' => $_POST["ville2"]
-            )
-        );
-        $existParcours = $parcoursManager->getParcours($ville1, $ville2) || $parcoursManager->getParcours($ville2, $ville1);
+        $existParcours = $parcoursManager->getParcours($_POST["ville1"], $_POST["ville2"]) || $parcoursManager->getParcours($_POST["ville2"], $_POST["ville1"]);
         if ($existParcours) {
 ?>
             <p><img src="image/erreur.png" alt="Error Cross"> Le parcours existe déjà</p>

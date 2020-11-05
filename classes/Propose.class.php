@@ -13,6 +13,8 @@ class Propose
     private $heure;
     private $nombrePlaces;
     private $sens;
+    private $moyenneAvis;
+    private $messageAvis;
 
     public function __construct(array $valeurs) {
         if (!empty($valeurs))
@@ -51,6 +53,12 @@ class Propose
                     break;
                 case 'pro_sens':
                     $this->setSens($valeur);
+                    break;
+                case 'av_avg':
+                    $this->setMoyenneAvis($valeur);
+                    break;
+                case 'av_msg':
+                    $this->setMessageAvis($valeur);
                     break;
             }
         }
@@ -214,5 +222,37 @@ class Propose
     public function setVilleArrivee($villeArrivee)
     {
         $this->villeArrivee = $villeArrivee;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMoyenneAvis()
+    {
+        return $this->moyenneAvis;
+    }
+
+    /**
+     * @param mixed $moyenneAvis
+     */
+    public function setMoyenneAvis($moyenneAvis)
+    {
+        $this->moyenneAvis = $moyenneAvis;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessageAvis()
+    {
+        return $this->messageAvis;
+    }
+
+    /**
+     * @param mixed $messageAvis
+     */
+    public function setMessageAvis($messageAvis)
+    {
+        $this->messageAvis = $messageAvis;
     }
 }

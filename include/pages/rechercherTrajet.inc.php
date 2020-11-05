@@ -1,38 +1,38 @@
 <?php
-    $db = new Mypdo();
-    $villeManager = new VilleManager($db);
-    $proposeManager = new ProposeManager($db);
-    $listeVille = $villeManager->getAllVilleDepartWhereExistTrajet();
-    if (!empty($_POST["villeDepart"]))
-        $_SESSION['villeDepart'] = $_POST["villeDepart"];
+$db = new Mypdo();
+$villeManager = new VilleManager($db);
+$proposeManager = new ProposeManager($db);
+$listeVille = $villeManager->getAllVilleDepartWhereExistTrajet();
+if (!empty($_POST["villeDepart"]))
+    $_SESSION['villeDepart'] = $_POST["villeDepart"];
 ?>
 <h1>Rechercher un trajet</h1>
 <?php
-    if (empty($_SESSION['villeDepart'])) {
-?>
-<form action="index.php?page=rechercherTrajet" method="post">
-    <div>
-        <label for="villeDepart">Ville de départ : </label>
-        <br>
-        <select name="villeDepart" id="villeDepart">
-            <?php
+if (empty($_SESSION['villeDepart'])) {
+    ?>
+    <form action="index.php?page=rechercherTrajet" method="post">
+        <div>
+            <label for="villeDepart">Ville de départ : </label>
+            <br>
+            <select name="villeDepart" id="villeDepart">
+                <?php
                 foreach ($listeVille as $ville) {
-            ?>
+                    ?>
                     <option value="<?php echo $ville->getNumero() ?>"><?php echo $ville->getNom() ?></option>
-            <?php
+                    <?php
                 }
-            ?>
-        </select>
-    </div>
-    <input type="submit" value="Valider">
-</form>
-<?php
-    }
-    else {
-        $villeDepart = new Ville($villeManager->getVilleFromId($_SESSION['villeDepart']));
-        $listeVilleArrivee = $villeManager->getAllVilleArriveeWhereExistTrajetFromVille1($_SESSION['villeDepart']);
-        if (empty($_POST["villeArrivee"]) || empty($_POST["dateDepart"]) || empty($_POST["precision"]) || empty($_POST["aPartirDe"])) {
-?>
+                ?>
+            </select>
+        </div>
+        <input type="submit" value="Valider">
+    </form>
+    <?php
+}
+else {
+    $villeDepart = new Ville($villeManager->getVilleFromId($_SESSION['villeDepart']));
+    $listeVilleArrivee = $villeManager->getAllVilleArriveeWhereExistTrajetFromVille1($_SESSION['villeDepart']);
+    if (empty($_POST["villeArrivee"]) && empty($_POST["dateDepart"]) && empty($_POST["precision"]) && empty($_POST["aPartirDe"])) {
+        ?>
         <form action="index.php?page=rechercherTrajet" method="post" id="gridForm">
             <div>
                 <label>Ville de départ :</label>
@@ -63,61 +63,62 @@
                 <label for="aPartirDe">A partir de : </label>
                 <select name="aPartirDe" id="aPartirDe">
                     <?php
-                        for ($i=0; $i<24; $i++) {
-                    ?>
-                            <option value="<?php echo $i . ':' . 00 . ':' . 00 ?>"><?php echo $i . 'h' ?></option>
-                    <?php
-                        }
+                    for ($i=0; $i<24; $i++) {
+                        ?>
+                        <option value="<?php echo $i . ':' . '00' ?>"><?php echo $i . 'h' ?></option>
+                        <?php
+                    }
                     ?>
                 </select>
             </div>
             <input type="submit" value="Valider">
         </form>
-<?php
+        <?php
+    }
+    else {
+        $listeTrajet = $proposeManager->getAllExistTrajet($_SESSION['villeDepart'], $_POST["villeArrivee"], $_POST["dateDepart"], $_POST["precision"], $_POST["aPartirDe"]);
+        if (count($listeTrajet) == 0) {
+            ?>
+            <p><img src="image/erreur.png" alt="Error Cross"> Désolé, pas de trajet disponible !</p>
+            <?php
+            unset($_SESSION['villeDepart']);
+            header('Refresh: 1.5; url = index.php?page=rechercherTrajet');
         }
         else {
-               $listeTrajet = $proposeManager->getAllExistTrajet($_SESSION['villeDepart'], $_POST["villeArrivee"], $_POST["dateDepart"], $_POST["precision"], $_POST["aPartirDe"]);
-               if (count($listeTrajet) == 0) {
-?>
-                   <p><img src="image/erreur.png" alt="Error Cross">Désolé, pas de trajet disponible !</p>
-<?php
-                   unset($_SESSION['villeDepart']);
-                   header('Refresh: 1.5; url = index.php?page=rechercherTrajet');
-               }
-               else {
-?>
-                   <table>
-                       <thead>
-                            <tr>
-                                <th>Ville départ</th>
-                                <th>Ville arrivée</th>
-                                <th>Date départ</th>
-                                <th>Heure départ</th>
-                                <th>Nombre de place(s)</th>
-                                <th>Nom du covoitureur</th>
-                            </tr>
-                       </thead>
-                       <tbody>
-                       <?php
-                            foreach ($listeTrajet as $trajet) {
-                       ?>
-                                <tr>
-                                    <td><?php echo $trajet->getVilleDepart() ?></td>
-                                    <td><?php echo $trajet->getVilleArrivee() ?></td>
-                                    <td><?php echo $trajet->getDate() ?></td>
-                                    <td><?php echo $trajet->getHeure() ?></td>
-                                    <td><?php echo $trajet->getNombrePlaces() ?></td>
-                                    <td><?php echo $trajet->getNomPersonne() ?></td>
-                                </tr>
-                       <?php
-                            }
-                       ?>
-                       </tbody>
-                   </table>
-<?php
-               }
-?>
-<?php
+            ?>
+            <table id="rechercherTrajet">
+                <thead>
+                <tr>
+                    <th>Ville départ</th>
+                    <th>Ville arrivée</th>
+                    <th>Date départ</th>
+                    <th>Heure départ</th>
+                    <th>Nombre de place(s)</th>
+                    <th>Nom du covoitureur</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach ($listeTrajet as $trajet) {
+                    ?>
+                    <tr>
+                        <td><?php echo $trajet->getVilleDepart() ?></td>
+                        <td><?php echo $trajet->getVilleArrivee() ?></td>
+                        <td><?php echo $trajet->getDate() ?></td>
+                        <td><?php echo $trajet->getHeure() ?></td>
+                        <td><?php echo $trajet->getNombrePlaces() ?></td>
+                        <td title="Moyenne des avis : <?php echo round($trajet->getMoyenneAvis(), 1) ?>, Dernier avis : <?php echo $trajet->getMessageAvis() ?>"><?php echo $trajet->getNomPersonne() ?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                </tbody>
+            </table>
+            <?php
+            unset($_SESSION['villeDepart']);
         }
+        ?>
+        <?php
     }
-?>    
+}
+?>

@@ -28,6 +28,13 @@ class ParcoursManager
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function checkParcours($ville1, $ville2) {
+        $requete = $this->db->prepare("SELECT par_num, par_km, vil_num1, vil_num2 FROM parcours WHERE vil_num1 = " . $ville1 . " AND vil_num2 = " . $ville2 . " OR vil_num1 = " . $ville2 . " AND vil_num2 = " . $ville1);
+        $requete->execute();
+        $parcours = $requete->fetch(PDO::FETCH_ASSOC);
+        return new Parcours($parcours);
+    }
+
     public function getAllParcours() {
         $listeParcours = array();
         $requete = $this->db->prepare('SELECT par_num, par_km, v.vil_nom AS vil_num1, v2.vil_nom AS vil_num2 FROM parcours JOIN ville v on parcours.vil_num1 = v.vil_num JOIN ville v2 on parcours.vil_num2 = v2.vil_num');
@@ -40,7 +47,7 @@ class ParcoursManager
 
     public function getParcoursVille2FromVille1($ville1) {
         $listeParcours = array();
-        $requete = $this->db->prepare('SELECT par_num, par_km, vil_num1, v.vil_nom AS vil_num2 FROM parcours JOIN ville v on parcours.vil_num2 = v.vil_num WHERE vil_num1 = ' . $ville1);
+        $requete = $this->db->prepare('SELECT vil_num1, vil_nom AS vil_num2 FROM parcours JOIN ville v on parcours.vil_num1 = v.vil_num WHERE vil_num2 = ' . $ville1 . ' UNION SELECT vil_num2, vil_nom FROM parcours JOIN ville v2 on parcours.vil_num2 = v2.vil_num WHERE vil_num1 = ' . $ville1);
         $requete->execute();
         while ($parcours = $requete->fetch(PDO::FETCH_ASSOC))
             $listeParcours[] = new Parcours($parcours);
