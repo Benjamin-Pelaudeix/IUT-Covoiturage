@@ -42,7 +42,7 @@
                         <?php
                         foreach ($listeParcours as $parcours) {
                             ?>
-                            <option value="<?php echo $parcours->getNumero() ?>"><?php echo $parcours->getVille2() ?></option>
+                            <option value="<?php echo $parcours->getVille1() ?>"><?php echo $parcours->getVille2() ?></option>
                             <?php
                         }
                         ?>
@@ -63,15 +63,20 @@
 <?php
         }
         else {
-            $verifySens = $parcoursManager->getParcours($_SESSION['villeDepart'], $_POST["villeArrivee"]);
+            $existingParcours = $parcoursManager->checkParcours($_SESSION['villeDepart'], $_POST["villeArrivee"]);
+            $checkSens = $parcoursManager->getParcours($_SESSION['villeDepart'], $_POST["villeArrivee"]);
+            if ($checkSens)
+                $sens = 0;
+            else
+                $sens = 1;
             $newTrajet = new Propose(
                 array(
-                    'par_num' => 12,
+                    'par_num' => $existingParcours->getNumero(),
                     'per_num' => $_SESSION['userid'],
                     'pro_date' => $_POST["dateDepart"],
                     'pro_time' => $_POST["heureDepart"],
                     'pro_place' => $_POST["nombrePlaces"],
-                    'pro_sens' => 0
+                    'pro_sens' => $sens
                 )
             );
             $proposeManager->add($newTrajet);

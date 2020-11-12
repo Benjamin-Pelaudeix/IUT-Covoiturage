@@ -226,3 +226,7 @@ input[type=submit], input[type=button] {
 .nonConnecte {
 	display: none;
 }
+
+#rechercherTrajet td {
+	width: 17%;
+}
