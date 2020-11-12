@@ -41,7 +41,7 @@ class PersonneManager
     }
 
     public function getPersonneFromId($id) {
-        $requete = $this->db->prepare('SELECT per_num, per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd FROM personne WHERE per_num = ' . $id);
+        $requete = $this->db->prepare('SELECT personne.per_num, per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd, AVG(avi_note) AS avi_note, avi_comm FROM personne JOIN avis a on personne.per_num = a.per_num WHERE personne.per_num = ' . $id .' GROUP BY personne.per_num');
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }

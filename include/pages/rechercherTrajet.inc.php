@@ -2,6 +2,7 @@
     $db = new Mypdo();
     $villeManager = new VilleManager($db);
     $proposeManager = new ProposeManager($db);
+    $personneManager = new PersonneManager($db);
     $listeVille = $villeManager->getAllVilleDepartWhereExistTrajet();
     if (!empty($_POST["villeDepart"]))
         $_SESSION['villeDepart'] = $_POST["villeDepart"];
@@ -100,6 +101,7 @@
                        <tbody>
                        <?php
                             foreach ($listeTrajet as $trajet) {
+                                $conducteur = new Personne($personneManager->getPersonneFromId($trajet->getNumeroPersonne()));
                        ?>
                                 <tr>
                                     <td><?php echo $trajet->getVilleDepart() ?></td>
@@ -107,7 +109,7 @@
                                     <td><?php echo $trajet->getDate() ?></td>
                                     <td><?php echo $trajet->getHeure() ?></td>
                                     <td><?php echo $trajet->getNombrePlaces() ?></td>
-                                    <td><?php echo $trajet->getNomPersonne() ?></td>
+                                    <td title="<?php echo 'Moyenne des notes : ' . $conducteur->getNote() . ', Dernier commentaire : ' . $conducteur->getCommentaire() ?>"><?php echo $conducteur->getNom() ?></td>
                                 </tr>
                        <?php
                             }

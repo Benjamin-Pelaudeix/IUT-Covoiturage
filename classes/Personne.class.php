@@ -14,6 +14,8 @@ class Personne
     private $ville;
     private $telephonePro;
     private $fonction;
+    private $note;
+    private $commentaire;
 
     public function __construct(array $valeurs) {
         if (!empty($valeurs))
@@ -55,6 +57,12 @@ class Personne
                     break;
                 case 'fon_libelle':
                     $this->setFonction($valeur);
+                    break;
+                case 'avi_note':
+                    $this->setNote($valeur);
+                    break;
+                case 'avi_comm':
+                    $this->setCommentaire($valeur);
                     break;
             }
         }
@@ -234,5 +242,37 @@ class Personne
     public function setFonction($fonction)
     {
         $this->fonction = $fonction;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNote()
+    {
+        return round($this->note, 2);
+    }
+
+    /**
+     * @param mixed $note
+     */
+    public function setNote($note): void
+    {
+        $this->note = $note;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
+
+    /**
+     * @param mixed $commentaire
+     */
+    public function setCommentaire($commentaire): void
+    {
+        $this->commentaire = $commentaire;
     }
 }
