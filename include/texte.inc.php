@@ -57,9 +57,6 @@
         case 'rechercherTrajet':
             include_once('pages/rechercherTrajet.inc.php');
             break;
-        case 'debug':
-            include_once('pages/debug.php');
-            break;
         default : 	include_once('pages/accueil.inc.php');
     }
 ?>

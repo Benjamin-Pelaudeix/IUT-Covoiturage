@@ -3,6 +3,7 @@
     $personneManager = new PersonneManager($db);
 ?>
 <?php
+    #Contrôle si les données renvoyées par le formulaire sont vides
     if (empty($_POST["nom"]) || empty($_POST["prenom"]) || empty($_POST["telephone"]) || empty($_POST["mail"]) || empty($_POST["login"]) || empty($_POST["password"])) {
 ?>
         <h1>Ajouter une personne</h1>
@@ -51,10 +52,13 @@
                 )
         );
         $personneManager->add($newPersonne);
+        #Contrôle si la catégorie renseignée est 'Etudiant'
         if ($_POST["categorie"] == 0) {
            header('Location: index.php?page=ajouterEtudiant');
         }
+        #Contrôle si la catégorie renseignée est 'Salarié'
         else {
             header('Location: index.php?page=ajouterSalarie');
         }
     }
+?>

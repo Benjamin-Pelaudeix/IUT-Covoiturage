@@ -4,6 +4,7 @@
 ?>
 <h1>Ajouter une ville</h1>
 <?php
+    #Contrôle si les données renvoyées par le formulaire sont vides
     if (empty($_POST["nom"])) {
 ?>
 <form action="index.php?page=ajouterVille" method="post">

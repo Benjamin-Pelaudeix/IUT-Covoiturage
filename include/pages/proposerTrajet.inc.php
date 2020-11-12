@@ -9,6 +9,7 @@
 ?>
     <h1>Proposer un trajet</h1>
 <?php
+    #Contrôle si les données renvoyées par le formulaire sont vides
     if (empty($_SESSION["villeDepart"])) {
 ?>
         <form action="index.php?page=proposerTrajet" method="post">

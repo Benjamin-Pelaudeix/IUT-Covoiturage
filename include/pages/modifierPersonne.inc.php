@@ -6,6 +6,7 @@
 ?>
     <h1>Modifier la personne <?php echo $personne->getPrenom() ?></h1>
 <?php
+    #Contrôle si les données renvoyées par le formulaire sont vides
     if (empty($_POST["nom"]) || empty($_POST["prenom"]) || empty($_POST["telephone"]) || empty($_POST["mail"]) || empty($_POST["login"]) || empty($_POST["password"])) {
 ?>
     <form action="index.php?page=modifierPersonne&id=<?php echo $numeroPersonne ?>" method="post" id="gridForm">
@@ -54,3 +55,4 @@ else {
 <?php
     header('Refresh: 1.5; url = index.php?page=listerPersonne');
 }
+?>

@@ -7,9 +7,11 @@
     $verifyPersonne = $personneManager->getPersonneFromId($idPersonne);
     $verifyEtudiant = $etudiantManager->getEtudiantFromId($idPersonne);
     $verifySalarie = $salarieManager->getSalarieFromId($idPersonne);
+    #Contrôle si l'identifiant de la personne n'est pas saisi ou n'existe pas dans le base
     if (empty($idPersonne) || !$verifyPersonne) {
         header('Location: index.php?page=listerPersonne');
     }
+    #Contrôle si l'identifiant est celui d'un étudiant
     else if ($verifyEtudiant) {
         $etudiant = new Personne($personneManager->getPersonneAsEtudiant($idPersonne));
 ?>
@@ -37,6 +39,7 @@
         <input type="button" onclick="history.back()" value="Retour">
 <?php
     }
+    #Contrôle si l'identifiant est celui d'un salarié
     else if ($verifySalarie) {
         $salarie = new Personne($personneManager->getPersonneAsSalarie($idPersonne));
 ?>

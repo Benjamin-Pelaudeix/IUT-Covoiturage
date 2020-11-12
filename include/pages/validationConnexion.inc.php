@@ -8,22 +8,25 @@
 ?>
     <h1>Pour vous connecter</h1>
 <?php
+    #Contrôle si le résultat donné est conforme à celui attendu
     if ($resultat != $_SESSION['resultat']) {
 ?>
             <p><img src="image/erreur.png" alt="Error Cross"> Calcul d'authentification erroné</p>
 <?php
             header('Refresh: 1.5; url=index.php?page=connexion');
-        }
-        else if (!$verifyConnexion) {
+    }
+    #Contrôle si les informations de connexions données sont présentes en base
+    else if (!$verifyConnexion) {
 ?>
             <p><img src="image/erreur.png" alt="Error Cross"> Cet utilisateur n'existe pas</p>
 <?php
             header('Refresh: 1.5; url=index.php?page=connexion');
-        }
-        else {
+    }
+    #Validation de la connexion
+    else {
             $connexion = new Personne($verifyConnexion);
             $_SESSION['username'] = $connexion->getPrenom();
             $_SESSION['userid'] = $connexion->getNumero();
             header('Location: index.php');
-        }
+    }
 ?>

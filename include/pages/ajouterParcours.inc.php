@@ -6,6 +6,7 @@
 ?>
 <h1>Ajouter un parcours</h1>
 <?php
+    #Contrôle si les données renvoyées par le formulaire sont vides
     if (empty($_POST["ville1"]) || empty($_POST["ville2"]) || empty($_POST["kilometrage"])) {
 ?>
 <form action="index.php?page=ajouterParcours" method="post">
@@ -38,6 +39,7 @@
     }
     else {
         $existParcours = $parcoursManager->getParcours($_POST["ville1"], $_POST["ville2"]) || $parcoursManager->getParcours($_POST["ville2"], $_POST["ville1"]);
+        #Contrôle si le parcours existe dans la base
         if ($existParcours) {
 ?>
             <p><img src="image/erreur.png" alt="Error Cross"> Le parcours existe déjà</p>
@@ -59,3 +61,4 @@
             header('Refresh: 1.5; url=index.php?ajouterParcours');
         }
     }
+?>
