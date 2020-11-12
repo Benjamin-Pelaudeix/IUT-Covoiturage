@@ -7,6 +7,7 @@
 ?>
 <h1>Ajouter un étudiant</h1>
 <?php
+    #Contrôle si les données renvoyées par le formulaire sont vides
     if (empty($_POST["telpro"]) || empty($_POST["fonction"])) {
 ?>
         <form action="index.php?page=ajouterSalarie" method="post">

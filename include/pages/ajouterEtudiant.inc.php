@@ -9,6 +9,7 @@
 ?>
 <h1>Ajouter un étudiant</h1>
 <?php
+    #Contrôle si les données renvoyées par le formulaire sont vides
     if (empty($_POST["annee"]) || empty($_POST["departement"])) {
 ?>
             <form action="index.php?page=ajouterEtudiant" method="post">

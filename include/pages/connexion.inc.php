@@ -1,12 +1,14 @@
 <?php
     $db = new Mypdo();
     $personneManager = new PersonneManager($db);
+    #Génération aléatoire des nombres pour le calcul d'authentification
     $nombre1 = rand(1,9);
     $nombre2 = rand(1,9);
     $_SESSION['resultat'] = $nombre1 + $nombre2;
 ?>
 <h1>Pour vous connecter</h1>
 <?php
+    #Contrôle si les données renvoyées par le formulaire sont vides
     if (empty($_POST["login"]) || empty($_POST["password"]) || empty($_POST["calcul"])) {
 ?>
         <form action="index.php?page=validationConnexion" method="post">
@@ -34,4 +36,5 @@
         </form>
 <?php
     }
+?>
 
