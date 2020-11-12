@@ -12,7 +12,8 @@
 		<?php echo $title ?>
 		</title>
 
-<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <script src="https://kit.fontawesome.com/e5e7c64170.js" crossorigin="anonymous"></script>
 </head>
 	<body>
 	<div id="header">	

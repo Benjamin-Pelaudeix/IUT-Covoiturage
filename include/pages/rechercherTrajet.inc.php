@@ -31,7 +31,7 @@
     else {
         $villeDepart = new Ville($villeManager->getVilleFromId($_SESSION['villeDepart']));
         $listeVilleArrivee = $villeManager->getAllVilleArriveeWhereExistTrajetFromVille1($_SESSION['villeDepart']);
-        if (empty($_POST["villeArrivee"]) || empty($_POST["dateDepart"]) || empty($_POST["precision"]) || empty($_POST["aPartirDe"])) {
+        if (empty($_POST["villeArrivee"]) || empty($_POST["dateDepart"]) || empty($_POST["precision"]) && empty($_POST["aPartirDe"])) {
 ?>
         <form action="index.php?page=rechercherTrajet" method="post" id="gridForm">
             <div>
@@ -86,7 +86,7 @@
                }
                else {
 ?>
-                   <table>
+                   <table id="parcours_possibles">
                        <thead>
                             <tr>
                                 <th>Ville départ</th>

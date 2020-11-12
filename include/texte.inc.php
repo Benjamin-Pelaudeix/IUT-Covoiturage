@@ -30,6 +30,12 @@
         case 'afficherPersonne':
             include_once('pages/afficherPersonne.inc.php');
             break;
+        case 'modifierPersonne':
+            include_once('pages/modifierPersonne.inc.php');
+            break;
+        case 'supprimerPersonne':
+            include_once('pages/supprimerPersonne.inc.php');
+            break;
         case 'ajouterVille':
             include_once('pages/ajouterVille.inc.php');
             break;

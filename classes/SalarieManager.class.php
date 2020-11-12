@@ -28,4 +28,9 @@ class SalarieManager
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function delete($id) {
+        $requete = $this->db->prepare('DELETE FROM salarie WHERE per_num = ' . $id);
+        $requete->execute();
+    }
+
 }

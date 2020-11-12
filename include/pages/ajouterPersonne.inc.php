@@ -47,7 +47,7 @@
                     'per_tel' => $_POST["telephone"],
                     'per_mail' => $_POST["mail"],
                     'per_login' => $_POST["login"],
-                    'per_pwd' => sha1(sha1($_POST["password"]) . SALT)
+                    'per_pwd' => sha1(sha1(mb_convert_encoding($_POST["password"], "UTF-8")) . mb_convert_encoding(SALT, "UTF-8"))
                 )
         );
         $personneManager->add($newPersonne);

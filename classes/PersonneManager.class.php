@@ -64,4 +64,14 @@ class PersonneManager
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function update($id, Personne $personne) {
+        $requete = $this->db->prepare("UPDATE personne SET per_nom = '". $personne->getNom() ."', per_prenom = '". $personne->getPrenom() ."', per_tel = '". $personne->getTelephone() ."', per_mail = '". $personne->getMail() ."', per_login = '". $personne->getLogin() ."', per_pwd = '". $personne->getPassword() ."' WHERE per_num = ". $id);
+        $requete->execute();
+    }
+
+    public function delete($id) {
+        $requete = $this->db->prepare('DELETE FROM personne WHERE per_num = ' . $id);
+        $requete->execute();
+    }
+
 }

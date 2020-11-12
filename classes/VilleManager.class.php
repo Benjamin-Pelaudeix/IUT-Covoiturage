@@ -41,7 +41,7 @@ class VilleManager
 
     public function getAllVilleDepartWhereExistTrajet() {
         $listeVille = array();
-        $requete = $this->db->prepare('SELECT DISTINCT vil_num1, vil_nom FROM (SELECT vil_num1, pro_sens FROM propose JOIN parcours p on propose.par_num = p.par_num WHERE pro_sens = 0 UNION SELECT vil_num2, pro_sens FROM propose JOIN parcours p2 on propose.par_num = p2.par_num WHERE pro_sens = 1) T1 JOIN ville on T1.vil_num1 = ville.vil_num');
+        $requete = $this->db->prepare('SELECT DISTINCT vil_num1 AS vil_num, vil_nom FROM (SELECT vil_num1, pro_sens FROM propose JOIN parcours p on propose.par_num = p.par_num WHERE pro_sens = 0 UNION SELECT vil_num2, pro_sens FROM propose JOIN parcours p2 on propose.par_num = p2.par_num WHERE pro_sens = 1) T1 JOIN ville on T1.vil_num1 = ville.vil_num');
         $requete->execute();
         while ($ville = $requete->fetch(PDO::FETCH_ASSOC))
             $listeVille[] = new Ville($ville);
@@ -50,7 +50,7 @@ class VilleManager
 
     public function getAllVilleArriveeWhereExistTrajetFromVille1($id) {
         $listeVille = array();
-        $requete = $this->db->prepare('SELECT vil_num2, vil_nom FROM parcours JOIN ville v on parcours.vil_num2 = v.vil_num WHERE par_num IN (SELECT propose.par_num FROM propose) AND vil_num1 =' . $id);
+        $requete = $this->db->prepare('SELECT vil_num1 AS vil_num, vil_nom from parcours join ville v on parcours.vil_num1 = v.vil_num where vil_num2='.$id.' UNION SELECT vil_num2, v2.vil_nom from parcours join ville v2 on parcours.vil_num2 = v2.vil_num where vil_num1='.$id);
         $requete->execute();
         while ($ville = $requete->fetch(PDO::FETCH_ASSOC))
             $listeVille[] = new Ville($ville);
