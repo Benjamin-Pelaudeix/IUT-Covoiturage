@@ -25,6 +25,27 @@ class PersonneManager
         $requete->execute();
     }
 
+    public function update($id, Personne $personne) {
+        $requete = $this->db->prepare("UPDATE personne SET per_nom =:nom, per_prenom =:prenom, per_tel =:telephone, per_mail = :mail, per_login = :login, per_pwd =:password WHERE per_num = ". $id);
+        $requete->bindValue(':nom', $personne->getNom());
+        $requete->bindValue(':prenom', $personne->getPrenom());
+        $requete->bindValue(':telephone', $personne->getTelephone());
+        $requete->bindValue(':mail', $personne->getMail());
+        $requete->bindValue(':login', $personne->getLogin());
+        $requete->bindValue(':password', $personne->getPassword());
+        $requete->execute();
+    }
+
+    public function updateWithoutPWD($id, Personne $personne) {
+        $requete = $this->db->prepare("UPDATE personne SET per_nom =:nom, per_prenom =:prenom, per_tel =:telephone, per_mail = :mail, per_login = :login WHERE per_num = ". $id);
+        $requete->bindValue(':nom', $personne->getNom());
+        $requete->bindValue(':prenom', $personne->getPrenom());
+        $requete->bindValue(':telephone', $personne->getTelephone());
+        $requete->bindValue(':mail', $personne->getMail());
+        $requete->bindValue(':login', $personne->getLogin());
+        $requete->execute();
+    }
+
     public function getLastAddedPersonne() {
         $requete = $this->db->prepare('SELECT per_num, per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd FROM personne ORDER BY per_num DESC LIMIT 1');
         $requete->execute();
@@ -41,7 +62,7 @@ class PersonneManager
     }
 
     public function getPersonneFromId($id) {
-        $requete = $this->db->prepare('SELECT personne.per_num, per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd, AVG(avi_note) AS avi_note, avi_comm FROM personne JOIN avis a on personne.per_num = a.per_num WHERE personne.per_num = ' . $id .' GROUP BY personne.per_num');
+        $requete = $this->db->prepare('SELECT personne.per_num, per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd, AVG(avi_note) AS avi_note, avi_comm FROM personne LEFT JOIN avis a on personne.per_num = a.per_num WHERE personne.per_num = ' . $id .' GROUP BY personne.per_num');
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
@@ -64,10 +85,6 @@ class PersonneManager
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, Personne $personne) {
-        $requete = $this->db->prepare("UPDATE personne SET per_nom = '". $personne->getNom() ."', per_prenom = '". $personne->getPrenom() ."', per_tel = '". $personne->getTelephone() ."', per_mail = '". $personne->getMail() ."', per_login = '". $personne->getLogin() ."', per_pwd = '". $personne->getPassword() ."' WHERE per_num = ". $id);
-        $requete->execute();
-    }
 
     public function delete($id) {
         $requete = $this->db->prepare('DELETE FROM personne WHERE per_num = ' . $id);

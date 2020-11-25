@@ -22,6 +22,13 @@ class EtudiantManager
         $requete->execute();
     }
 
+    public function update($id,$etudiant){
+        $requete = $this->db->prepare('UPDATE etudiant SET dep_num=:departement, div_num=:division WHERE per_num='.$id);
+        $requete->bindValue(':departement', $etudiant->getDepartement());
+        $requete->bindValue(':division', $etudiant->getDivision());
+        $requete->execute();
+    }
+
     public function getEtudiantFromId($id) {
         $requete = $this->db->prepare('SELECT per_num, dep_num, div_num FROM etudiant WHERE per_num = ' . $id);
         $requete->execute();
@@ -31,6 +38,14 @@ class EtudiantManager
     public function delete($id) {
         $requete = $this->db->prepare('DELETE FROM etudiant WHERE per_num = ' . $id);
         $requete->execute();
+    }
+
+    /**********RAJOUT_VAL********************/
+    public function getIsEtudiant($id){
+        $requete = "SELECT * FROM etudiant WHERE per_num=$id ";
+        $resultat = $this->db->query($requete);
+        $ligne = $resultat->rowCount();
+        return $ligne!==0;
     }
 
 }
