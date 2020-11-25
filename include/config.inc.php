@@ -3,9 +3,9 @@
 // A modifier en fonction de la configuration
 
 define('DBHOST', "localhost");
-define('DBNAME', "covoiturage");
+define('DBNAME', "tp3"); //covoiturage
 define('DBUSER', "root");
-define('DBPASSWD', "");
+define('DBPASSWD', "root");
 define('ENV','dev');
 define('SALT','48@!alsd');
 define('DBPORT',3306);
