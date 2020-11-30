@@ -14,6 +14,7 @@ class DivisionManager
         $this->db = $db;
     }
 
+    #Affichage de toutes les divisions
     public function getAllDivision() {
         $listeDivision = array();
         $requete = $this->db->prepare('SELECT div_num, div_nom FROM division');
