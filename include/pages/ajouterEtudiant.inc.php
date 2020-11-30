@@ -54,6 +54,7 @@
 ?>
                 <p><img src="image/valid.png" alt="Valid Check"> L'étudiant a bien été ajouté</p>
 <?php
+                #Redirection vers la page d'ajout d'une personne
                 header('Refresh: 1.5; url=index.php?page=ajouterPersonne');
             }
 ?>

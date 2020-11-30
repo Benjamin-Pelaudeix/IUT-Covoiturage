@@ -20,7 +20,7 @@
                 'vil_nom' => $_POST["nom"]
             )
         );
-        $villeManager->addVille($newVille);
+        $villeManager->add($newVille);
 ?>
         <p><img src="image/valid.png" alt="Valid Check"> La ville <b>"<?php echo $newVille->getNom() ?></b>" a été ajoutée</p>
 <?php

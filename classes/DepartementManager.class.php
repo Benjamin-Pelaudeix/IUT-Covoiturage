@@ -14,6 +14,7 @@ class DepartementManager
         $this->db = $db;
     }
 
+    #Affichage de tous les départements de la BD
     public function getAllDepartement() {
         $listeDepartement = array();
         $requete = $this->db->prepare('SELECT dep_num, dep_nom, vil_num FROM departement');
