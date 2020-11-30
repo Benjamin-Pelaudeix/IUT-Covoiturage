@@ -9,7 +9,7 @@
 ?>
 <form action="index.php?page=ajouterVille" method="post">
     <label for="nom">Nom : </label>
-    <input type="text" name="nom" id="nom">
+    <input type="text" name="nom" id="nom" pattern="[a-zA-ZÀ-ÿ]">
     <input type="submit" value="Valider">
 </form>
 <?php

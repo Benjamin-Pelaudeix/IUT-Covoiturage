@@ -15,7 +15,7 @@
                     <label for="login">Login : </label><br>
                 </div>
                 <div id="input1">
-                    <input type="text" name="nom" id="nom">
+                    <input type="text" name="nom" id="nom" pattern="[a-zA-ZÀ-ÿ]">
                     <input type="tel" name="telephone" id="telephone" pattern="[0-9]{10}">
                     <input type="text" name="login" id="login">
                 </div>
@@ -25,7 +25,7 @@
                     <label for="password">Mot de passe : </label><br>
                 </div>
                 <div id="input2">
-                    <input type="text" name="prenom" id="prenom">
+                    <input type="text" name="prenom" id="prenom" pattern="[a-zA-ZÀ-ÿ]">
                     <input type="email" name="mail" id="mail">
                     <input type="password" name="password" id="password">
                 </div>

@@ -24,9 +24,9 @@
             </div>
             <div>
                 <label for="calcul">
-                <img src="image/nb/<?php echo $nombre1 ?>.jpg" alt="<?php echo $nombre1 ?>">
+                <img src="image/nb/<?php echo $nombre1 ?>.jpg" alt="<?php echo "chiffre_".$nombre1; ?>">
                 +
-                <img src="image/nb/<?php echo $nombre2 ?>.jpg" alt="<?php echo $nombre2 ?>">
+                <img src="image/nb/<?php echo $nombre2 ?>.jpg" alt="<?php echo "chiffre_".$nombre2; ?>">
                 =
                 </label>
                 <br>
