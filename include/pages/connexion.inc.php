@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $personneManager = new PersonneManager($db);
     #Génération aléatoire des nombres pour le calcul d'authentification
@@ -36,5 +37,9 @@
         </form>
 <?php
     }
+}
+else {
+    header('Location: ../../index.php');
+}
 ?>
 

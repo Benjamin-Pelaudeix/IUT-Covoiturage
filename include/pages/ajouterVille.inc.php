@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $villeManager = new VilleManager($db);
 ?>
@@ -26,4 +27,8 @@
 <?php
         header('Refresh: 1.5; url=index.php?page=ajouterVille');
     }
+}
+else {
+    header('Location: ../../index.php');
+}
 ?>

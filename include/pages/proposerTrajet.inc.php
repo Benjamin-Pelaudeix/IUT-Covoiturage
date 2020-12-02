@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $villeManager = new VilleManager($db);
     $parcoursManager = new ParcoursManager($db);
@@ -88,4 +89,8 @@
             header('Refresh: 1.5; url=index.php?page=proposerTrajet');
         }
     }
+}
+else {
+    header('Location: ../../index.php');
+}
 ?>

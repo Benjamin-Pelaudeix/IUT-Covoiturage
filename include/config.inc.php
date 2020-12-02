@@ -5,7 +5,7 @@
 define('DBHOST', "localhost");
 define('DBNAME', "tp3"); //covoiturage
 define('DBUSER', "root");
-define('DBPASSWD', "root");
+define('DBPASSWD', "");
 define('ENV','dev');
 define('SALT','48@!alsd');
 define('DBPORT',3306);

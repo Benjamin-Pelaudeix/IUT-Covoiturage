@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $personneManager = new PersonneManager($db);
     $listePersonne = $personneManager->getAllPersonne();
@@ -32,3 +33,8 @@
     ?>
     </tbody>
 </table>
+<?php
+}
+else {
+    header('Location: ../../index.php');
+}

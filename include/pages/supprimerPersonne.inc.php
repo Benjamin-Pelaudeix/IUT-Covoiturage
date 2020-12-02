@@ -1,3 +1,6 @@
+<?php
+if (session_status() == PHP_SESSION_ACTIVE) {
+?>
 <h1>Supprimer une personne</h1>
 <?php
     $db = new Mypdo();
@@ -33,4 +36,8 @@
 <?php
         header('Refresh: 1.5; url = index.php?page=listerPersonne');
     }
+}
+else {
+    header('Location: ../../index.php');
+}
 ?>

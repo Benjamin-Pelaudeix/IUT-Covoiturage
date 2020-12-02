@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $villeManager = new VilleManager($db);
     $listeVille = $villeManager->getAllVille();
@@ -25,3 +26,8 @@
         ?>
     </tbody>
 </table>
+<?php
+}
+else {
+    header('Location: ../../index.php');
+}

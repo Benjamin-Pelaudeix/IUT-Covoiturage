@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $personneManager = new PersonneManager($db);
     $fonctionManager = new FonctionManager($db);
@@ -46,4 +47,8 @@
 <?php
         header('Refresh: 1.5; url=index.php?page=ajouterPersonne');
     }
+}
+else {
+    header('Location: ../../index.php');
+}
 ?>
