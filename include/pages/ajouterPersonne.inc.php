@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $personneManager = new PersonneManager($db);
 ?>
@@ -61,4 +62,8 @@
             header('Location: index.php?page=ajouterSalarie');
         }
     }
+}
+else {
+    header('Location: ../../index.php');
+}
 ?>

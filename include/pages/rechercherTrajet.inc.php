@@ -1,4 +1,9 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
+    if (empty($_SESSION['username'])) {
+        header('url: index.php&page=home');
+    }
+    else {
     $db = new Mypdo();
     $villeManager = new VilleManager($db);
     $proposeManager = new ProposeManager($db);
@@ -123,4 +128,9 @@
 <?php
         }
     }
+    }
+}
+else {
+    header('Location: ../../index.php');
+}
 ?>    

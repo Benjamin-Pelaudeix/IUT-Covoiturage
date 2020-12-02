@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $personneManager = new PersonneManager($db);
     $etudiantManager = new EtudiantManager($db);
@@ -158,5 +159,9 @@ else {
 <?php
     unset($_SESSION["formulaire"]);
     header('Refresh: 1.5; url = index.php?page=listerPersonne');
+}
+}
+else {
+    header('Location: ../../index.php');
 }
 ?>

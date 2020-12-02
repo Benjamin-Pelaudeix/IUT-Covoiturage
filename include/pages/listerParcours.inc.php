@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $parcoursManager = new ParcoursManager($db);
     $listeParcours = $parcoursManager->getAllParcours();
@@ -29,3 +30,8 @@
     ?>
     </tbody>
 </table>
+<?php
+}
+else {
+    header('Location: ../../index.php');
+}

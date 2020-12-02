@@ -52,10 +52,16 @@
             include_once('pages/listerParcours.inc.php');
             break;
         case 'proposerTrajet':
-            include_once('pages/proposerTrajet.inc.php');
+            if (!empty($_SESSION['username']))
+                include_once('pages/proposerTrajet.inc.php');
+            else
+                include_once('pages/accueil.inc.php');
             break;
         case 'rechercherTrajet':
-            include_once('pages/rechercherTrajet.inc.php');
+            if (!empty($_SESSION['username']))
+                include_once('pages/rechercherTrajet.inc.php');
+            else
+                include_once('pages/accueil.inc.php');
             break;
         default : 	include_once('pages/accueil.inc.php');
     }

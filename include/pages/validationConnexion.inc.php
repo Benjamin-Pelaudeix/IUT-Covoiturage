@@ -1,4 +1,5 @@
 <?php
+if (session_status() == PHP_SESSION_ACTIVE) {
     $db = new Mypdo();
     $personneManager = new PersonneManager($db);
     $login = $_POST["login"];
@@ -29,4 +30,8 @@
             $_SESSION['userid'] = $connexion->getNumero();
             header('Location: index.php');
     }
+}
+else {
+    header('Location: ../../index.php');
+}
 ?>
