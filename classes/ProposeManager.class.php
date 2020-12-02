@@ -36,4 +36,32 @@ class ProposeManager
         return $listeTrajet;
     }
 
+    #Supprimer une proposition de trajet de la BD
+    public function delete($id) {
+        $requete = $this->db->prepare('DELETE FROM propose WHERE per_num = ' . $id);
+        $requete->execute();
+    }
+
+    #Supprimer un avis de trajet de la BD
+    public function deleteAvis($id) {
+        $requete = $this->db->prepare('DELETE FROM avis WHERE per_num =' . $id.' OR per_per_num='.$id);
+        $requete->execute();
+    }
+
+    public function presenceIdPropose($id){
+        $requete = $this->db->prepare('SELECT COUNT(*) AS nombre_lignes FROM propose WHERE per_num='.$id );
+        $requete->execute();
+        $propose = $requete->fetch(PDO::FETCH_ASSOC);
+        return new Propose($propose);
+    }
+
+    public function presenceIdAvis($id){
+        $requete = $this->db->prepare('SELECT COUNT(*) AS nombre_lignes FROM avis WHERE per_num='.$id.' OR per_per_num='.$id);
+        $requete->execute();
+        $propose = $requete->fetch(PDO::FETCH_ASSOC);
+        return new Propose($propose);
+    }
+
+
+
 }

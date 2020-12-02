@@ -15,6 +15,7 @@ class Propose
     private $sens;
     private $moyenneAvis;
     private $messageAvis;
+    private $nombreLignes;
 
     public function __construct(array $valeurs) {
         if (!empty($valeurs))
@@ -60,6 +61,8 @@ class Propose
                 case 'av_msg':
                     $this->setMessageAvis($valeur);
                     break;
+                case 'nombre_lignes' :
+                    $this->setNombreLignes($valeur);
             }
         }
     }
@@ -255,4 +258,21 @@ class Propose
     {
         $this->messageAvis = $messageAvis;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNombreLignes()
+    {
+        return $this->nombreLignes;
+    }
+
+    /**
+     * @param mixed $nombreLignes
+     */
+    public function setNombreLignes($nombreLignes)
+    {
+        $this->nombreLignes = $nombreLignes;
+    }
+
 }
