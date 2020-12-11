@@ -1,5 +1,7 @@
 <?php
+
 if (session_status() == PHP_SESSION_ACTIVE) {
+
     if (empty($_SESSION['username'])) {
         header('url: index.php&page=home');
     }
@@ -123,6 +125,7 @@ if (session_status() == PHP_SESSION_ACTIVE) {
                        </tbody>
                    </table>
 <?php
+                   unset($_SESSION['villeDepart']);
                }
 ?>
 <?php
@@ -131,6 +134,8 @@ if (session_status() == PHP_SESSION_ACTIVE) {
     }
 }
 else {
+
     header('Location: ../../index.php');
+
 }
 ?>    
