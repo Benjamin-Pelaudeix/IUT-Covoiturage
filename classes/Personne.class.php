@@ -255,7 +255,7 @@ class Personne
     /**
      * @param mixed $note
      */
-    public function setNote($note): void
+    public function setNote($note)
     {
         $this->note = $note;
     }
@@ -271,7 +271,7 @@ class Personne
     /**
      * @param mixed $commentaire
      */
-    public function setCommentaire($commentaire): void
+    public function setCommentaire($commentaire)
     {
         $this->commentaire = $commentaire;
     }

@@ -52,10 +52,21 @@ if (session_status() == PHP_SESSION_ACTIVE) {
 <?php
         header('Refresh: 1.5; url = index.php?page=listerPersonne');
     }
-    #Si l'identifiant n'est pas présent dans la base
+    #Si l'identifiant n'est pas présent dans la base salarié ni etudiant
     else {
+        #test pour savoir si des lignes le concernant existent dans propose
+        if($proposeManager->presenceIdPropose($numeroPersonne)->getNombreLignes()!=0){
+            #Existence de lignes
+            $proposeManager->delete($numeroPersonne);
+        }
+        #test pour savoir si des lignes le concernant existent dans avis
+        if($proposeManager->presenceIdAvis($numeroPersonne)->getNombreLignes()!=0){
+            $proposeManager->deleteAvis($numeroPersonne);
+        }
+        #Suppression de sa ligne dans personne
+        $personneManager->delete($numeroPersonne);
 ?>
-        <p><img src="image/erreur.png" alt="Error Cross"> La personne ne peut être supprimée</p>
+        <p><img src="image/valid.png" alt="Valid Check"> Personne supprimée avec succès</p>
 <?php
         header('Refresh: 1.5; url = index.php?page=listerPersonne');
     }

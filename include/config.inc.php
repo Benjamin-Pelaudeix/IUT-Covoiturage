@@ -6,7 +6,7 @@ define('DBHOST', "localhost");
 define('DBNAME', "tp3"); //covoiturage
 define('DBUSER', "root");
 define('DBPASSWD', "root");
-define('ENV','dev');
+define('ENV','prod');
 define('SALT','48@!alsd');
 define('DBPORT',3306);
 // pour un environememnt de production remplacer 'dev' (d�veloppement) par 'prod' (production)

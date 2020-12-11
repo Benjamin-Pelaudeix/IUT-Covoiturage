@@ -21,7 +21,7 @@ if (session_status() == PHP_SESSION_ACTIVE) {
                     <label for="login">Login : </label><br>
                 </div>
                 <div id="input1">
-                    <input type="text" name="nom" id="nom" pattern="[a-zA-ZÀ-ÿ]" value="<?php echo $personne->getNom() ?>">
+                    <input type="text" name="nom" id="nom" value="<?php echo $personne->getNom() ?>">
                     <input type="tel" name="telephone" id="telephone" pattern="[0-9]{10}" value="<?php echo $personne->getTelephone() ?>">
                     <input type="text" name="login" id="login" value="<?php echo $personne->getLogin() ?>">
                 </div>
@@ -31,7 +31,7 @@ if (session_status() == PHP_SESSION_ACTIVE) {
                     <label for="password">Mot de passe : </label><br>
                 </div>
                 <div id="input2">
-                    <input type="text" name="prenom" id="prenom" pattern="[a-zA-ZÀ-ÿ]" value="<?php echo $personne->getPrenom() ?>">
+                    <input type="text" name="prenom" id="prenom" value="<?php echo $personne->getPrenom() ?>">
                     <input type="email" name="mail" id="mail" value="<?php echo $personne->getMail() ?>">
                     <input type="password" name="password" id="password">
                 </div>

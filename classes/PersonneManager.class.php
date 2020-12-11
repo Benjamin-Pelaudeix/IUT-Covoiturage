@@ -68,7 +68,7 @@ class PersonneManager
 
     #Affichage d'une personne recherchée par son identifiant
     public function getPersonneFromId($id) {
-        $requete = $this->db->prepare('SELECT personne.per_num, per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd, AVG(avi_note) AS avi_note, avi_comm FROM personne LEFT JOIN avis a on personne.per_num = a.per_num WHERE personne.per_num = ' . $id .' GROUP BY personne.per_num');
+        $requete = $this->db->prepare('SELECT personne.per_num, per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd, AVG(avi_note) AS avi_note, avi_comm FROM personne LEFT JOIN avis a on personne.per_num = a.per_num WHERE personne.per_num = ' . $id .' GROUP BY personne.per_num,per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd,avi_note, avi_comm');
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
