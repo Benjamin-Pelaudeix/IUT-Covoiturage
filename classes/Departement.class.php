@@ -8,21 +8,21 @@ class Departement
     private $ville;
 
     public function __construct(array $valeurs) {
-        if (!empty($valeurs))
-            $this->affecte($valeurs);
-    }
+                    if (!empty($valeurs))
+                        $this->affecte($valeurs);
+                }
 
     public function affecte(array $donnees) {
-        foreach ($donnees as $attribut => $valeur) {
-            switch ($attribut) {
-                case 'dep_num':
-                    $this->setNumero($valeur);
-                    break;
-                case 'dep_nom':
-                    $this->setNom($valeur);
-                    break;
-                case 'vil_num':
-                    $this->setVille($valeur);
+                    foreach ($donnees as $attribut => $valeur) {
+                        switch ($attribut) {
+                            case 'dep_num':
+                                $this->setNumero($valeur);
+                                break;
+                            case 'dep_nom':
+                                $this->setNom($valeur);
+                                break;
+                            case 'vil_num':
+                                $this->setVille($valeur);
                     break;
             }
         }
